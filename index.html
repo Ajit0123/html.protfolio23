@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ajit Kumar – Portfolio</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #f7f9fc;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --brand:#2563eb;
+    --brand-2:#60a5fa;
+    --ring: rgba(37,99,235,.15);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+    color:var(--text);
+    background: radial-gradient(1200px 800px at 10% -10%, #eaf2ff 0%, transparent 60%),
+                radial-gradient(1000px 700px at 110% 10%, #eaf7ff 0%, transparent 55%),
+                var(--bg);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  /* ====== Header / Nav ====== */
+  header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(255,255,255,.8);
+    border-bottom:1px solid #eef2f7;
+  }
+  .nav{
+    max-width:1200px; margin:0 auto; padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px;
+    color:var(--brand); font-size:20px;
+  }
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--brand);}
+  nav a{
+    text-decoration:none; color:var(--text); padding:8px 12px; border-radius:10px;
+    font-weight:500; transition:color .2s, background .2s;
+  }
+  nav a:hover, nav a.active{color:var(--brand); background:#eef2ff}
+  .menu{display:flex; gap:6px; align-items:center}
+  .burger{display:none; border:0; background:transparent; font-size:24px; cursor:pointer}
+
+  /* ====== Layout helpers ====== */
+  section{padding:80px 20px}
+  .wrap{max-width:1200px; margin:0 auto}
+  .grid{display:grid; gap:24px}
+  .card{
+    background:var(--card); border:1px solid #eef2f7; border-radius:20px; padding:24px;
+    box-shadow:0 10px 30px rgba(37,99,235,.06);
+  }
+
+  /* ====== Hero ====== */
+  .hero{padding-top:90px}
+  .hero .card{display:grid; grid-template-columns:1.2fr .9fr; align-items:center; gap:24px; overflow:hidden; position:relative}
+  .badge{
+    display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px;
+    background:#eef2ff; color:var(--brand); font-weight:600; font-size:13px;
+  }
+  .title{font-size:44px; line-height:1.15; margin:10px 0 8px}
+  .subtitle{color:var(--muted)}
+  .cta{display:flex; gap:12px; margin-top:18px}
+  .btn{
+    border:0; border-radius:14px; padding:12px 18px; font-weight:700; cursor:pointer;
+    background:var(--brand); color:white; box-shadow:0 8px 20px var(--ring);
+    transition:transform .15s ease, box-shadow .2s ease, opacity .2s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.outline{background:#eef2ff;color:var(--brand)}
+  .blob{
+    position:absolute; right:-120px; bottom:-120px; width:360px; height:360px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--brand-2), var(--brand));
+    filter:blur(40px); opacity:.25; animation:float 8s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-18px)}
+  }
+
+  /* ====== About ====== */
+  .about{grid-template-columns: 1fr 1.2fr}
+  .avatar{
+    width:100%; border-radius:20px; aspect-ratio:1/1; object-fit:cover;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+  }
+  .list{margin:10px 0 0; padding-left:18px}
+  .chip{display:inline-block; background:#f1f5ff; color:#274596; padding:6px 10px; border-radius:999px; margin:6px 8px 0 0; font-weight:600; font-size:12px}
+
+  /* ====== Skills ====== */
+  .skills .bar{height:10px; background:#edf2f7; border-radius:999px; overflow:hidden; position:relative}
+  .skills .fill{height:100%; width:0; background:linear-gradient(90deg, var(--brand), var(--brand-2)); border-radius:999px; transition:width 1.2s ease}
+  .skill{display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px}
+
+  /* ====== Projects ====== */
+  .projects .grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .project{
+    overflow:hidden; position:relative; cursor:pointer; transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .project:hover{transform:translateY(-6px); box-shadow:0 16px 36px rgba(37,99,235,.12)}
+  .project img{width:100%; height:160px; object-fit:cover; border-radius:14px}
+  .project h4{margin:12px 0 6px}
+  .project p{color:var(--muted); font-size:14px}
+
+  /* ====== Experience / Education ====== */
+  .timeline{border-left:3px solid #e5ecff; padding-left:18px}
+  .timeline .item{position:relative; margin:0 0 18px}
+  .timeline .item::before{
+    content:""; position:absolute; left:-12px; top:10px; width:10px; height:10px; border-radius:50%;
+    background:var(--brand);
+  }
+  .meta{color:var(--muted); font-size:14px}
+
+  /* ====== Contact ====== */
+  .contact form{display:grid; gap:12px}
+  .input, textarea{
+    width:100%; background:#fff; border:1px solid #e5ecff; border-radius:12px; padding:12px 14px; font:inherit;
+    outline:none; transition:border .2s, box-shadow .2s;
+    margin: 2px;
+  }
+  .input:focus, textarea:focus{border-color:#c7d7ff; box-shadow:0 0 0 6px #eaf0ff}
+
+  /* ====== Footer ====== */
+  footer{padding:40px 20px; text-align:center; color:var(--muted)}
+
+  /* ====== Reveal Animations ====== */
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .8s ease, transform .8s ease}
+  .reveal.show{opacity:1; transform:translateY(0)}
+
+  /* ====== Responsive ====== */
+  @media (max-width: 900px){
+    .hero .card{grid-template-columns:1fr}
+    .about{grid-template-columns:1fr}
+    .burger{display:block}
+    .menu{display:none; flex-direction:column; background:white; position:absolute; top:58px; right:12px; padding:10px; border-radius:12px; border:1px solid #eef2f7}
+    .menu.show{display:flex}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand"><span class="dot"></span> Ajit Kumar</div>
+    <button class="burger" aria-label="menu">☰</button>
+    <nav class="menu">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ====== HERO ====== -->
+<section id="home" class="hero">
+  <div class="wrap">
+    <div class="card reveal" style="min-height:260px">
+      <div>
+        <span class="badge">👨‍💻 Administrator / Application Support Engineer</span>
+        <h1 class="title">Hi, I’m Ajit Kumar</h1>
+        <p class="subtitle">
+          I help users and teams by resolving issues fast, keeping systems stable and secure, and building
+          useful tools. <span id="typewriter" aria-label="roles"></span>
+        </p>
+        <div class="cta">
+          <a class="btn" href="#contact">Contact Me</a>
+          <a class="btn outline" href="#projects">View Projects</a>
+        </div>
+      </div>
+      <div class="card" style="background:linear-gradient(180deg,#f7fbff, #ffffff)">
+        <h3 style="margin:0 0 8px">Quick Facts</h3>
+        <ul class="list">
+          <li><b>Current:</b> Wipro (Client: Cisco) – Tier-2 Mobility · InfoSec · Accounts Support</li>
+          <li><b>Experience:</b> 2.5+ years in application/user support</li>
+          <li><b>Languages:</b> English, Hindi</li>
+          <li><b>Location:</b> Ramgarh, Jharkhand</li>
+        </ul>
+      </div>
+      <div class="blob"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<section id="about">
+  <div class="wrap">
+    <div class="grid about">
+      <img class="avatar reveal" src="/Portfolio/pics/Ajit Photo.jpg" alt="Ajit Kumar">
+      <div class="card reveal">
+        <h2>About Me</h2>
+        <p>
+          Application Support Engineer with hands-on experience across Mobility, InfoSec and Accounts teams.
+          Strong in troubleshooting, user issue resolution, onboarding, and secure access management. Quick
+          learner, calm under pressure, and passionate about delivering great support.
+        </p>
+        <div style="margin-top:8px">
+          <span class="chip">Full-Stack Web Dev Bootcamp</span>
+          <span class="chip">Windows 11 Comprehensive Course</span>
+          <span class="chip">English</span>
+          <span class="chip">Hindi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SKILLS ====== -->
+<section id="skills">
+  <div class="wrap">
+    <div class="card reveal">
+      <h2>Skills</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <div>
+          <div class="skill"><strong>Application Support & Troubleshooting</strong><span>90%</span></div>
+          <div class="bar"><div class="fill" data-width="90%"></div></div>
+        </div>
+        <div>
+          <div class="skill"><strong>User Account Admin (AD/SSO)</strong><span>85%</span></div>
+          <div class="bar"><div class="fill" data-width="85%"></div></div>
+        </div>
+        <div>
+          <div class="skill"><strong>Incident & Problem Mgmt (ITIL)</strong><span>80%</span></div>
+          <div class="bar"><div class="fill" data-width="80%"></div></div>
+        </div>
+        <div>
+          <div class="skill"><strong>HTML & CSS</strong><span>80%</span></div>
+          <div class="bar"><div class="fill" data-width="80%"></div></div>
+        </div>
+        <div>
+          <div class="skill"><strong>Java</strong><span>60%</span></div>
+          <div class="bar"><div class="fill" data-width="60%"></div></div>
+        </div>
+        <div>
+          <div class="skill"><strong>C++</strong><span>60%</span></div>
+          <div class="bar"><div class="fill" data-width="60%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROJECTS ====== -->
+<section id="projects">
+  <div class="wrap">
+    <div class="card reveal">
+      <h2>Projects</h2>
+      <div class="grid projects">
+        <article class="project card">
+          <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop" alt="College Website">
+          <h4>College Website (Final Year)</h4>
+          <p>Developed a functional college site with pages for departments, notices and forms. Focus on clean UI and quick navigation.</p>
+        </article>
+        <article class="project card">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop" alt="Ticket Helper">
+          <h4>Ticket Helper Toolkit</h4>
+          <p>Internal scripts/templates to speed up user triage and common resolution steps, reducing average handling time.</p>
+        </article>
+        <article class="project card">
+          <img src="https://images.unsplash.com/photo-1501159599894-155982264a55?q=80&w=1200&auto=format&fit=crop" alt="Access Onboarding">
+          <h4>Access Onboarding Playbook</h4>
+          <p>Guided flows for new-user provisioning & SSO checks; helped acquisitions users onboard faster with fewer tickets.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EXPERIENCE ====== -->
+<section id="experience">
+  <div class="wrap">
+    <div class="card reveal">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="item">
+          <h3>Wipro Pvt. Ltd. (Client: Cisco) — Application / Administrator Support Engineer</h3>
+          <div class="meta">Mar 2023 – Present · Tier-1, Tier-2 Mobility · Tier-2 InfoSec · Tier-2 Accounts</div>
+          <ul class="list">
+            <li>Resolved 2500+ user issues within SLA; appreciated by Cisco client.</li>
+            <li>Onboarding & access provisioning for acquisition users; mobile work-profile support.</li>
+            <li>Investigated network issues with security/infrastructure teams; identity & access controls.</li>
+          </ul>
+        </div>
+      </div>
+      <h2 style="margin-top:18px">Education</h2>
+      <div class="timeline">
+        <div class="item">
+          <h3>Bachelor of Computer Applications — Gossner College, Ranchi</h3>
+          <div class="meta">Aug 2019 – Oct 2022</div>
+          <p>Final year project: Functional college website.</p>
+        </div>
+        <div class="item">
+          <h3>12th (Intermediate) — Radha Govind Inter College, Ramgarh</h3>
+          <div class="meta">May 2017 – Mar 2019 · Science</div>
+        </div>
+      </div>
+      <h2 style="margin-top:18px">Certifications</h2>
+      <p>Full-Stack Web Development Bootcamp · Microsoft Windows 11: Comprehensive Course</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACT ====== -->
+<section id="contact">
+  <div class="wrap">
+    <div class="card reveal">
+      <h2>Contact Me</h2>
+      <p class="meta">Email: <a href="mailto:ajitkumar27018@gmail.com">ajitkumar27018@gmail.com</a> / Phone: <a href="tel:+91878936007">+91 87893 6007</a></p>
+      <form id="contactForm" action="https://formspree.io/f/movnqeol" method="POST">
+        <input class="input" type="text" name="name" placeholder="Your Name" required>
+        <input class="input" type="email" name="email" placeholder="Your Email" required>
+        <textarea class="input" name="message" rows="5" placeholder="Your Message" required></textarea>
+        <input type="hidden" name="_subject" value="New message from Ajit's Portfolio">
+        <button class="btn" type="submit">Send Message</button>
+      </form>
+      <p id="formMsg" class="meta" role="status" style="margin-top:6px"></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Ajit Kumar · Built with HTML, CSS & JS · Made with ❤️
+</footer>
+
+<script>
+  // ===== Mobile Menu =====
+  const burger = document.querySelector('.burger');
+  const menu = document.querySelector('.menu');
+  burger.addEventListener('click', ()=> menu.classList.toggle('show'));
+
+  // ===== Smooth active link highlight =====
+  const links = document.querySelectorAll('nav a');
+  const sections = [...document.querySelectorAll('section')];
+  const onScroll = () => {
+    const y = window.scrollY + 100;
+    sections.forEach(sec=>{
+      const id = sec.id, top = sec.offsetTop, bottom = top + sec.offsetHeight;
+      const link = document.querySelector(`nav a[href="#${id}"]`);
+      if (y>=top && y<bottom){ links.forEach(a=>a.classList.remove('active')); link?.classList.add('active'); }
+    });
+  };
+  window.addEventListener('scroll', onScroll);
+
+  // ===== Reveal on scroll + Skill bar fill =====
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        // animate skill bars
+        entry.target.querySelectorAll('.fill').forEach(f=>{
+          f.style.width = f.dataset.width;
+        });
+        io.unobserve(entry.target);
+      }
+    })
+  }, {threshold: .2});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ===== Typewriter for roles =====
+  const roles = [
+    "Tier-2 Mobility · InfoSec · Accounts",
+    "User Account Administration (AD / SSO)",
+    "Application Support & Troubleshooting",
+    "Incident & Problem Management (ITIL)"
+  ];
+  const tw = document.getElementById('typewriter');
+  let idx=0, ch=0, dir=1;
+  function type(){
+    const word = roles[idx];
+    ch += dir;
+    tw.textContent = "— " + word.slice(0, Math.max(0,ch));
+    if(ch===word.length){ dir=-1; setTimeout(type,1200); return;}
+    if(ch===0){ dir=1; idx=(idx+1)%roles.length; }
+    setTimeout(type, dir>0?55:25);
+  }
+  type();
+
+  // ===== Contact form inline feedback (works with Formspree redirects disabled) =====
+  const form = document.getElementById('contactForm');
+  const formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    formMsg.textContent = "Sending…";
+    try{
+      const resp = await fetch(form.action, { method:'POST', body: new FormData(form), headers: {'Accept':'application/json'}});
+      if(resp.ok){
+        form.reset();
+        formMsg.textContent = "✅ Thanks! Your message was sent.";
+      }else{
+        formMsg.textContent = "❌ Failed to send. Please try again.";
+      }
+    }catch{
+      formMsg.textContent = "❌ Network error. Please try again.";
+    }
+  });
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
